@@ -979,7 +979,7 @@ void chooseColor(){
     cin>>secondaryColor;
     gotoxy(38, 12);
     cin>>PacmanColor;
-    gotoxy(37 16);
+    gotoxy(37, 16);
     cin>>mapColor;
     PlaceHolderMapColor = mapColor;
 
