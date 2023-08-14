@@ -4,6 +4,8 @@
 
 Pac-Man is a Japanese video game franchise published in the 1980s. It is one of the longest-running, best-selling, and highest-grossing video game franchises in history. For my final project in the *Basic Programming* course, I aimed to build a simple and functional version of Pac-Man.
 
+![pacman](https://github.com/Farid-Karimi/Pac-Man/assets/118434072/47cdcf36-4e38-4127-adfb-030046aaa424)
+
 ## Project Plans
 
 ### Project Declaration:
@@ -21,9 +23,10 @@ The main objective of this project was to implement all the features of the orig
 - Leader Board
 - Easter Egg
 
-## Maze Generation
+## Implementations
+### Maze Generation
 
-The map is randomly generated based on the dimensions entered by the user, utilizing the Depth-First Search (DFS) algorithm. This functionality has been implemented using a class named `maze`. To achieve randomness in map generation, I utilized the C++ `random` library:
+The map is randomly generated based on the dimensions entered by the user, utilizing the Depth-First Search **(DFS)** algorithm. This functionality has been implemented using a class named `maze`. To achieve randomness in map generation, I utilized the C++ `random` library:
 
 ```c++
 random_device rd;
@@ -32,17 +35,17 @@ uniform_int_distribution<mt19937::result_type> random(1,4);
 Orientation random_direction = Orientation(random(eng));
 ```
 
-## Ghosts Behavior
+### Ghosts Behavior
 
-To enable the ghosts to track the player, I utilized a simple Breadth-First Search (BFS) algorithm that finds the path to Pac-Man or a nearby block. This was done to introduce randomness in the ghost behavior, as otherwise, they would all choose the same path and stick together. Notably, the red ghost, known as Blinky, tracks the exact position of the player and exhibits the most aggressive behavior.
+To enable the ghosts to track the player, I utilized a simple Breadth-First Search **(BFS)** algorithm that finds the path to Pac-Man or a nearby block. This was done to introduce randomness in the ghost behavior, as otherwise, they would all choose the same path and stick together. Notably, the red ghost, known as Blinky, tracks the exact position of the player and exhibits the most aggressive behavior.
 
-The algorithm uses a vector to queue (push_back) and dequeue (pop_back) the cells of the map to search for Pac-Man's location. Since Pac-Man's coordinates change by only one cell each time it moves, updating the BFS algorithm doesn't significantly affect the ghost's position. Consequently, the ghost will be in the general direction of Pac-Man.
+The algorithm uses a vector to queue `(push_back)` and dequeue `(pop_back)` the cells of the map to search for Pac-Man's location. Since Pac-Man's coordinates change by only one cell each time it moves, updating the BFS algorithm doesn't significantly affect the ghost's position. Consequently, the ghost will be in the general direction of Pac-Man.
 
-## Graphics
+### Graphics
 
-All the visuals in the game consist of ASCII art, which I either created myself or modified from existing sources to suit the game's aesthetic. Additionally, Unicode characters from the Noto Sans Canadian Aboriginal font have been used.
+All the visuals in the game consist of ASCII art, which I either created myself or modified from existing sources to suit the game's aesthetic. Additionally, Unicode characters from the *Noto Sans Canadian Aboriginal* font have been used.
 
-## Saving Data
+### Saving Data
 
 To save game progress, track scores, and compete with other players, I implemented a mechanism to write and read data from a **.txt** file. The data is stored in a text file, which is utilized to construct the leaderboard and map as needed.
 
