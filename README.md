@@ -49,6 +49,36 @@ All the visuals in the game consist of ASCII art, which I either created myself 
 
 To save game progress, track scores, and compete with other players, I implemented a mechanism to write and read data from a **.txt** file. The data is stored in a text file, which is utilized to construct the leaderboard and map as needed.
 
+### Compilation 
+
+To compile the program, follow these steps:
+
+1. Ensure you have a C++ compiler installed on your system. Popular options include GCC (GNU Compiler Collection) for Linux and MinGW (Minimalist GNU for Windows) for Windows.
+
+1. Open a terminal or command prompt and navigate to the directory containing the source code files.
+
+1. Run the following command to compile the program:
+
+   ```shell
+   g++ main.cpp -o game
+   ```
+
+   Replace `g++` with the appropriate compiler command if you are using a different compiler.
+
+1. Once the compilation process completes without any errors, an executable file named `game` (or the name you specified after the `-o` option) will be created in the current directory.
+
+   - On Windows, the file will have the `.exe` extension (`game.exe`).
+   - On Linux, the file will have no extension (`game`).
+
+1. You can now run the game by executing the generated executable from the terminal or by double-clicking it in the file explorer.
+
+   ```shell
+   ./game      # Linux
+   game.exe    # Windows
+   ```
+
+It's worth noting that the compilation process may vary depending on your operating system and the specific compiler you are using. Make sure to adjust the compilation commands accordingly.
+
 ## Future Plans
 
 This game possesses substantial potential for further growth and improvement. Some potential future enhancements include adding a graphical user interface (GUI), refining the chase and escape algorithms, and implementing a difficulty-based and time-based leaderboard for enhanced precision.
