@@ -268,7 +268,7 @@ void printMap(int w , int h){                                   // translating a
     SetConsoleTextAttribute(hConsole, 15);
 }  
 //***********************************************************************************************************************************************
-void gotoxy(int x, int y){  
+void gotoxy(short x, short y){  
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);  
     COORD position = {x, y};  
   
@@ -989,7 +989,7 @@ void chooseColor(){
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 int main(){ 
-
+	SetConsoleOutputCP(CP_UTF8);
     chooseColor();
 
     int  ghost1Color = 4;
@@ -1989,12 +1989,5 @@ void loadFile(int &w, int &h){
     coordinates.close();
     isNewGame = true;
 
-    // for ( i = 0 ; i < 50 ; i ++){
-    //     for ( j = 0 ; j < 50; j++){
-    //         cout << map[i][j];
-    //     }
-    //     cout << endl;
-    // }
-    // system("pause");
 }
 
