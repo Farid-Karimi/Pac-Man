@@ -268,9 +268,9 @@ void printMap(int w , int h){                                   // translating a
     SetConsoleTextAttribute(hConsole, 15);
 }  
 //***********************************************************************************************************************************************
-void gotoxy(short x, short y){  
+void gotoxy(int x, int y){  
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);  
-    COORD position = {x, y};  
+    COORD position = {(short)x, (short)y};  
   
     SetConsoleCursorPosition(hStdout, position);  
 }  
@@ -896,10 +896,10 @@ void generateMaze(int w , int h){
         }
     }
 
-    for(int i=0 ; i<2*h+1 ; i++){
-        for(int j=0 ; j<2*w+1 ; j++){
-            if(map[i][j]==' ' && map[i][j-1]=='_' && map[i][j+1]=='_'){
-                map[i][j]='_';
+    for (int i = 1; i < 2 * h + 1; i++) {
+        for (int j = 0; j < 2 * w + 1; j++) {
+            if (j > 0 && j < 2 * w && map[i][j] == ' ' && map[i][j - 1] == '_' && map[i][j + 1] == '_') {
+                map[i][j] = '_';
             }
         }
     }
