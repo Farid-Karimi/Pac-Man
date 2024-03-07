@@ -1,4 +1,4 @@
-# ![Pac-Man logo.png](https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Pac-Man_logo.png/250px-Pac-Man_logo.png)
+<img src="https://static.wikia.nocookie.net/logopedia/images/c/ca/Pac-Man_1980_%28Alt%29.svg/revision/latest/scale-to-width-down/1200?cb=20230727130740" style="width: 365px;" />
 
 ## Introduction
 
