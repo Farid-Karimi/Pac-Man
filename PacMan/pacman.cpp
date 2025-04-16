@@ -9,7 +9,7 @@
 #include <stack>
 #include <random>
 #include <time.h>
-
+#include<chrono>
 #define pacmanIcon "\u15E6"
 #define ghostIcon "\u15E3"
 
@@ -182,19 +182,28 @@ Maze::Maze(unsigned int width, unsigned int height) : width(width), height(heigh
         }
     }
 }
-bool Maze::succsesfullyConnectedToNeighbour(Coords& cellCoords){
-    random_device rd;
-    mt19937 eng(rd());
-    uniform_int_distribution<mt19937::result_type> random(1,4);
-    Orientation random_direction = Orientation(random(eng));
+bool Maze::succsesfullyConnectedToNeighbour(Coords& cellCoords) {
+    // Static engine persists between calls (seeded only once)
+    static std::mt19937 eng{[]{
+        auto seed = static_cast<uint32_t>(
+            std::chrono::high_resolution_clock::now()
+            .time_since_epoch().count() ^ 
+            reinterpret_cast<uintptr_t>(&eng)  // Memory address adds entropy
+        );
+        return seed;
+    }()};
 
-    for(int i = 0; i < 4; i++){
-        Orientation next_rand_direction = Orientation( (random_direction + i)%4 );
-        Coords neighbour_coords = Coords::directionOffset[next_rand_direction] + cellCoords;
+    // Get random direction (1-4)
+    std::uniform_int_distribution<int> dist(1, 4);
+    Orientation random_direction = Orientation(dist(eng));
 
-        if( areCoordsValid(neighbour_coords) && !cellAt(neighbour_coords).visited() ){
-            connect(cellCoords, neighbour_coords, next_rand_direction);
-            cellCoords = neighbour_coords;
+    for(int i = 0; i < 4; i++) {
+        Orientation dir = Orientation((random_direction + i) % 4);
+        Coords neighbour = Coords::directionOffset[dir] + cellCoords;
+
+        if(areCoordsValid(neighbour) && !cellAt(neighbour).visited()) {
+            connect(cellCoords, neighbour, dir);
+            cellCoords = neighbour;
             return true;
         }
     }
@@ -793,48 +802,63 @@ void pauseMenu(int w , int h){
     system("cls");
 }
 //***********************************************************************************************************************************************
+
 void dimension(int &w , int &h){
     int BorderColor = primaryColor;
     int InsideColor = secondaryColor;
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, BorderColor);
-    cout<<"                    ╒════════════════════════════════╕                 "<<endl;
 
-    cout<<"                    │ ";
-    cout<<"       ";
-    SetConsoleTextAttribute(hConsole, InsideColor);    
-    cout<<"CHOOSE DIMENSION        ";
-    SetConsoleTextAttribute(hConsole, BorderColor);    
-    cout<<"│                 "<<endl;
+    while (true) {
+        SetConsoleTextAttribute(hConsole, BorderColor);
+        cout<<"                    ╒════════════════════════════════╕                 "<<endl;
 
-    cout<<"                    ╘════════════════════════════════╛                 "<<endl;
-    cout<<endl;
-    int height , width;
-    cout<<"                           ════════════════════  "<<endl;
-    SetConsoleTextAttribute(hConsole, InsideColor);
-    cout<<"                              Enter Width:"<<endl;
-    Beep(850,100);
-    SetConsoleTextAttribute(hConsole, BorderColor);
-    cout<<"                           ════════════════════  "<<endl;
-    gotoxy(42,5);
-    cin >> width;
+        cout<<"                    │ ";
+        cout<<"       ";
+        SetConsoleTextAttribute(hConsole, InsideColor);    
+        cout<<"CHOOSE DIMENSION        ";
+        SetConsoleTextAttribute(hConsole, BorderColor);    
+        cout<<"│                 "<<endl;
 
-    cout << endl;
-    cout << endl;
-    cout<<"                           ════════════════════  "<<endl;
-    SetConsoleTextAttribute(hConsole, InsideColor);
-    cout<<"                              Enter Height:"<<endl;
-    Beep(850,100);
-    SetConsoleTextAttribute(hConsole, BorderColor);
-    cout<<"                           ════════════════════  "<<endl;
-    gotoxy(43,9);
-    cin>>height;
-    Sleep(100);
+        cout<<"                    ╘════════════════════════════════╛                 "<<endl;
+        cout<<endl;
+        int height , width;
+        cout<<"                           ════════════════════  "<<endl;
+        SetConsoleTextAttribute(hConsole, InsideColor);
+        cout<<"                    Enter Width (<= 50):"<<endl;
+        Beep(850,100);
+        SetConsoleTextAttribute(hConsole, BorderColor);
+        cout<<"                           ════════════════════  "<<endl;
+        gotoxy(42,5);
+        cin >> width;
 
-    w=width/2;
-    h=height/2;
+        cout << endl << endl;
+        cout<<"                           ════════════════════  "<<endl;
+        SetConsoleTextAttribute(hConsole, InsideColor);
+        cout<<"                   Enter Height (<= 40):"<<endl;
+        Beep(850,100);
+        SetConsoleTextAttribute(hConsole, BorderColor);
+        cout<<"                           ════════════════════  "<<endl;
+        gotoxy(43,9);
+        cin>>height;
+        Sleep(100);
+
+        if (width <= 50 && height < 40 && width > 0 && height > 0) {
+            w = width / 2;
+            h = height / 2;
+            break;
+        } else {
+            system("cls");
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+            cout << "\n\n\t\tInvalid input! Width must be <= 50 and Height <= 40. Try again.\n\n";
+            Beep(500, 200);
+            Sleep(1000);
+            system("cls");
+        }
+    }
+
     system("cls");
 }
+
 //--------------------------------------------------------------------------------------------------------
 void generateMaze(int w , int h){
     
