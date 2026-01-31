@@ -81,7 +81,7 @@ It's worth noting that the compilation process may vary depending on your operat
 
 ## Future Plans
 
-This game possesses substantial potential for further growth and improvement. Some potential future enhancements include adding a graphical user interface (GUI), refining the chase and escape algorithms, and implementing a difficulty-based and time-based leaderboard for enhanced precision.
+This game possesses substantial potential for further growth and improvement. Some potential future enhancements include adding a graphical user interface (GUI), refining the chase and escape algorithms, and implementing a difficulty-based and time-based leaderboard for enhanced precision, I would also be considering implementing an agent to play the game.
 
 ## Resources
 
@@ -94,4 +94,4 @@ This game possesses substantial potential for further growth and improvement. So
 ## Credits
 
 Course Instructor: [Dr. Kheradpisheh](https://www.linkedin.com/in/saeed-reza-kheradpisheh-7a0b18155/)  
-Teammate: [Shayan Shahrabi](https://www.linkedin.com/in/shayanshahrabi/)
+Teammate: [Shayan Shahrabi](https://www.linkedin.com/in/shayanshahrabi/) 
