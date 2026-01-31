@@ -94,5 +94,4 @@ This game possesses substantial potential for further growth and improvement. So
 ## Credits
 
 Course Instructor: [Dr. Kheradpisheh](https://www.linkedin.com/in/saeed-reza-kheradpisheh-7a0b18155/)  
-Project Mentor: [Mobin Nesari](https://www.linkedin.com/in/mobin-nesari/)  
 Teammate: [Shayan Shahrabi](https://www.linkedin.com/in/shayanshahrabi/)
